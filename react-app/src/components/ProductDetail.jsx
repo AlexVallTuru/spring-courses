@@ -1,5 +1,6 @@
+import { PropTypes } from "prop-types";
 
-// eslint-disable-next-line react/prop-types
+
 export const ProductDetail = ({ product = {} }) => {
 
     return (
@@ -10,4 +11,8 @@ export const ProductDetail = ({ product = {} }) => {
         </tr>
     )
 
+}
+
+ProductDetail.propTypes = {
+    product: PropTypes.object.isRequired
 }

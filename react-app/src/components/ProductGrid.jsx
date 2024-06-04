@@ -1,7 +1,7 @@
+import { PropTypes } from "prop-types";
 import { ProductDetail } from "./ProductDetail";
 
-// eslint-disable-next-line react/prop-types
-export const ProductGrid = ({ products = [] }) => {
+export const ProductGrid = ( { products = []} ) => {
     return (
         <table>
             <thead>
@@ -17,5 +17,9 @@ export const ProductGrid = ({ products = [] }) => {
                 })}
             </tbody>
         </table>
-    );
-};
+    )
+}
+
+ProductGrid.propTypes = { 
+    products : PropTypes.array.isRequired
+}
