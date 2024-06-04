@@ -5,13 +5,24 @@ const initialDateForm = {
     description: '',
     price: ''
 }
-export const ProductForm = () => {
+// eslint-disable-next-line react/prop-types
+export const ProductForm = ({handlerAdd}) => {
 
     const [form, setForm] = useState(initialDateForm);
 
     const { name, description, price } = form;
     return (
-        <form>
+        <form onSubmit={(event) => {
+            event.preventDefault();
+
+            if(!name || !description || !price) {
+                alert('Please complete all fields');
+                return;
+            }
+            //console.log(form)
+            handlerAdd(form);
+            setForm(initialDateForm);
+        }}>
             <div>
                 <input
                     placeholder="Name"

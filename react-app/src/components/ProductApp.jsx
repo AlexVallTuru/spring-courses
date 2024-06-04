@@ -12,12 +12,17 @@ export const ProductApp = ({title}) => {
         const result = listProduct(); 
         setProducts(result)
     },[])
+
+    const handlerAddProduct = (product) => {
+        console.log(product);
+        setProducts([...products, {...product}])
+    }
     return (
         <div>
         <h1>{title}</h1>
         <div>
             <div>
-        <ProductForm />
+        <ProductForm handlerAdd={handlerAddProduct} />
             </div>
             <div>
         <ProductGrid products={products}/>
