@@ -3,14 +3,14 @@ import { ProductDetail } from "./ProductDetail";
 
 export const ProductGrid = ( {handlerProductSelected, handlerRemove, products = []} ) => {
     return (
-        <table>
+        <table className="table table-hover table-striped">
             <thead>
                 <tr>
-                    <th>name</th>
-                    <th>description</th>
-                    <th>price</th>
-                    <th>update</th>
-                    <th>remove</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Update</th>
+                    <th>Remove</th>
                 </tr>
             </thead>
             <tbody>
