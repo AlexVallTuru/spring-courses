@@ -1,16 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const initialDateForm = {
+    id: 0,
     name: '',
     description: '',
     price: ''
 }
 // eslint-disable-next-line react/prop-types
-export const ProductForm = ({handlerAdd}) => {
+export const ProductForm = ({productSelected, handlerAdd}) => {
 
     const [form, setForm] = useState(initialDateForm);
 
     const { name, description, price } = form;
+
+    useEffect(() => {
+        setForm(productSelected);
+    }, [productSelected])
+
     return (
         <form onSubmit={(event) => {
             event.preventDefault();
@@ -61,7 +67,7 @@ export const ProductForm = ({handlerAdd}) => {
 
             </div>
             <div>
-                <button type="submit">Create</button>
+                <button type="submit">Save</button>
             </div>
         </form>
     )
