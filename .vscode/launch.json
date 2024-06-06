@@ -9,6 +9,16 @@
             "projectName": "springboot-crud",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-BackendProductsApplication<backend-products>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.alex.curso.springboot.backend.backend_products.BackendProductsApplication",
+            "projectName": "backend-products",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

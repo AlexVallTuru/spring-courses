@@ -28,8 +28,5 @@ public class ProductValidation implements Validator{
         }else if (product.getPrice() < 500) {
             errors.rejectValue("price", null, "deve ser un valor numerico o superior a 500");
         }
-
-
     }
-
 }
