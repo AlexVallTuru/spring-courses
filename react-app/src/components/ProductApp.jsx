@@ -1,6 +1,6 @@
 import { PropTypes } from "prop-types";
 import { useEffect, useState } from "react";
-import { listProduct } from "../services/ProductService";
+import { findAll, update, create, remove } from "../services/ProductService";
 import { ProductGrid } from "./ProductGrid";
 import { ProductForm } from "./ProductForm";
 
@@ -15,28 +15,36 @@ export const ProductApp = ({ title }) => {
         price: ''
     });
 
+    const getProducts = async () => {
+        const result = await findAll();
+        setProducts(result.data._embedded.products)
+    }
+
     useEffect(() => {
-        const result = listProduct();
-        setProducts(result)
+        getProducts();
     }, [])
 
-    const handlerAddProduct = (product) => {
+
+    const handlerAddProduct = async (product) => {
         console.log(product);
 
-        if(product.id > 0) {
+        if (product.id > 0) {
+            const response = await update(product);
             setProducts(products.map(prod => {
-                if(prod.id == product.id) {
-                    return {...product}
+                if (prod.id == response.data.id) {
+                    return { ...response.data }
                 }
                 return prod;
             }));
         } else {
-            setProducts([...products, { ...product, id: new Date().getTime()}])
+            const response = await create(product);
+            setProducts([...products, { ...response.data }])
         }
     }
 
-    const handlerRemoveProduct = (id) => {
-        console.log(id);
+    const handlerRemoveProduct = async (id) => {
+        //console.log(id);
+        await remove(id);
         setProducts(products.filter(product => product.id !== id));
     }
 
@@ -49,12 +57,12 @@ export const ProductApp = ({ title }) => {
             <h2>{title}</h2>
             <div className="row">
                 <div className="col">
-                    <ProductForm handlerAdd={handlerAddProduct} productSelected={productSelected}/>
+                    <ProductForm handlerAdd={handlerAddProduct} productSelected={productSelected} />
                 </div>
                 <div className="col">
                     {
-                        products.length > 0 ? <ProductGrid products={products} handlerRemove={handlerRemoveProduct} handlerProductSelected={handlerProductSelected} /> 
-                        : <div className="alert alert-warning">No hay productos en el sistema</div>
+                        products.length > 0 ? <ProductGrid products={products} handlerRemove={handlerRemoveProduct} handlerProductSelected={handlerProductSelected} />
+                            : <div className="alert alert-warning">No hay productos en el sistema</div>
                     }
 
                 </div>
